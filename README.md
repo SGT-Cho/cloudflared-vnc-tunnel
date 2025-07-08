@@ -29,8 +29,8 @@ A secure, dockerized VNC client that connects through Cloudflare Tunnel, providi
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/vnc-cloudflared-docker.git
-cd vnc-cloudflared-docker
+git clone https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client.git
+cd cloudflared-tunnel-vnc-docker-client
 
 # Copy and configure environment variables
 cp .env.example .env
@@ -170,8 +170,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💬 Support
 
-- 📧 [Open an issue](https://github.com/yourusername/vnc-cloudflared-docker/issues) for bug reports
-- 💡 [Start a discussion](https://github.com/yourusername/vnc-cloudflared-docker/discussions) for questions and ideas
+- 📧 [Open an issue](https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client/issues) for bug reports
+- 💡 [Start a discussion](https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client/discussions) for questions and ideas
 - 📖 Check our [FAQ](docs/FAQ.md) for common questions
 
 ---
