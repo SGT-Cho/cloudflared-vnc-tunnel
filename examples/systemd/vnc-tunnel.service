@@ -1,0 +1,52 @@
+# VNC Cloudflared Tunnel SystemD Service
+# Place this file in /etc/systemd/system/vnc-tunnel.service
+
+[Unit]
+Description=VNC Cloudflared Tunnel Service
+Documentation=https://github.com/yourusername/vnc-cloudflared-docker
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+RemainAfterExit=yes
+
+# User and group (adjust as needed)
+User=vnc-operator
+Group=docker
+
+# Working directory
+WorkingDirectory=/opt/vnc-cloudflared-docker
+
+# Environment file (optional)
+EnvironmentFile=-/etc/vnc-tunnel/environment
+
+# Start command
+ExecStart=/opt/vnc-cloudflared-docker/vnc-client.sh start
+
+# Stop command
+ExecStop=/opt/vnc-cloudflared-docker/vnc-client.sh stop
+
+# Restart policy
+Restart=on-failure
+RestartSec=30s
+
+# Resource limits
+LimitNOFILE=65535
+LimitNPROC=4096
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/vnc-cloudflared-docker
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=vnc-tunnel
+
+[Install]
+WantedBy=multi-user.target
