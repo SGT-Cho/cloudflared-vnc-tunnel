@@ -1,0 +1,28 @@
+[Unit]
+Description=VNC Tunnel Service for %i
+Documentation=https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+ExecStart=/usr/local/bin/vnc-tunnel %i
+Restart=always
+RestartSec=10
+User=vnc-tunnel
+Group=vnc-tunnel
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log/vnc-tunnel
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=vnc-tunnel-%i
+
+[Install]
+WantedBy=multi-user.target

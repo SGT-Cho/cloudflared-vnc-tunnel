@@ -1,0 +1,45 @@
+#!/bin/bash
+# VNC Tunnel Manager - Cloudflare Access TCP tunnel for VNC connections
+
+set -euo pipefail
+
+PROFILE_DIR="/etc/vnc-tunnel/profiles"
+PROFILE="${1:-default}"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+# Helper functions
+log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
+log_error() { echo -e "${RED}[ERROR]${NC} $1" >&2; }
+log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
+
+# Check if profile exists
+if [[ ! -f "$PROFILE_DIR/$PROFILE" ]]; then
+    log_error "Profile '$PROFILE' not found in $PROFILE_DIR"
+    echo "Available profiles:"
+    ls -1 "$PROFILE_DIR" 2>/dev/null || echo "No profiles found"
+    exit 1
+fi
+
+# Load profile
+source "$PROFILE_DIR/$PROFILE"
+
+# Validate required variables
+if [[ -z "${VNC_HOSTNAME:-}" ]] || [[ -z "${VNC_URL:-}" ]]; then
+    log_error "Profile must define VNC_HOSTNAME and VNC_URL"
+    exit 1
+fi
+
+log_info "Starting VNC tunnel for profile: $PROFILE"
+log_info "Hostname: $VNC_HOSTNAME"
+log_info "Local URL: $VNC_URL"
+
+# Run cloudflared
+exec cloudflared access tcp \
+    --hostname="$VNC_HOSTNAME" \
+    --url="$VNC_URL" \
+    ${CLOUDFLARED_OPTIONS:-}
