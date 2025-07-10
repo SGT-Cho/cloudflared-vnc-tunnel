@@ -12,12 +12,19 @@ RestartSec=10
 User=vnc-tunnel
 Group=vnc-tunnel
 
+# Environment
+Environment="HOME=/var/lib/vnc-tunnel"
+Environment="USER=vnc-tunnel"
+
 # Security settings
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
 ReadWritePaths=/var/log/vnc-tunnel
+# Allow cloudflared to store auth tokens
+ReadWritePaths=/var/lib/vnc-tunnel
+StateDirectory=vnc-tunnel
 
 # Logging
 StandardOutput=journal

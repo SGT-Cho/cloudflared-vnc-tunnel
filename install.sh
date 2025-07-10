@@ -58,15 +58,30 @@ chown "$SERVICE_USER:$SERVICE_USER" "/var/log/vnc-tunnel"
 
 # Install files
 log_info "Installing VNC tunnel manager..."
-cp bin/vnc-tunnel "$INSTALL_DIR/"
+if [[ ! -f "bin/vnc-tunnel" ]]; then
+    log_error "bin/vnc-tunnel not found. Are you running from the correct directory?"
+    exit 1
+fi
+cp bin/vnc-tunnel "$INSTALL_DIR/" || { log_error "Failed to copy vnc-tunnel"; exit 1; }
 chmod +x "$INSTALL_DIR/vnc-tunnel"
 
 log_info "Installing systemd service..."
-cp systemd/vnc-tunnel@.service "$SYSTEMD_DIR/"
+if [[ ! -f "systemd/vnc-tunnel@.service" ]]; then
+    log_error "systemd/vnc-tunnel@.service not found"
+    exit 1
+fi
+cp systemd/vnc-tunnel@.service "$SYSTEMD_DIR/" || { log_error "Failed to copy service file"; exit 1; }
 
 log_info "Installing default profile..."
-cp profiles/default "$CONFIG_DIR/profiles/"
-cp profiles/example-* "$CONFIG_DIR/profiles/" 2>/dev/null || true
+if [[ ! -f "profiles/default" ]]; then
+    log_error "profiles/default not found"
+    exit 1
+fi
+cp profiles/default "$CONFIG_DIR/profiles/" || { log_error "Failed to copy default profile"; exit 1; }
+# Copy example profiles if they exist
+if compgen -G "profiles/example-*" > /dev/null; then
+    cp profiles/example-* "$CONFIG_DIR/profiles/" || log_warn "Failed to copy some example profiles"
+fi
 
 # Set permissions
 chown -R root:root "$CONFIG_DIR"
