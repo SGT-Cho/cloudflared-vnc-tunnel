@@ -3,7 +3,7 @@
 [![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://www.cloudflare.com/)
 [![systemd](https://img.shields.io/badge/systemd-0B7A0D?style=for-the-badge&logo=linux&logoColor=white)](https://systemd.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI/CD](https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client/workflows/CI/badge.svg)](https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client/actions)
+[![CI/CD](https://github.com/SGT-Cho/cloudflared-vnc-tunnel/workflows/CI/badge.svg)](https://github.com/SGT-Cho/cloudflared-vnc-tunnel/actions)
 
 A lightweight, native Linux service for creating secure VNC connections through Cloudflare Tunnel - no Docker required!
 
@@ -20,8 +20,8 @@ A lightweight, native Linux service for creating secure VNC connections through 
 
 ```bash
 # Clone and install
-git clone https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client.git
-cd cloudflared-tunnel-vnc-docker-client
+git clone https://github.com/SGT-Cho/cloudflared-vnc-tunnel.git
+cd cloudflared-vnc-tunnel
 sudo ./install.sh
 
 # Configure your connection
@@ -61,8 +61,8 @@ yay -S cloudflared
 
 ```bash
 # Clone the repository
-git clone https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client.git
-cd cloudflared-tunnel-vnc-docker-client
+git clone https://github.com/SGT-Cho/cloudflared-vnc-tunnel.git
+cd cloudflared-vnc-tunnel
 
 # Run installer
 sudo ./install.sh

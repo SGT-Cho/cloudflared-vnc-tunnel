@@ -1,6 +1,6 @@
 [Unit]
 Description=VNC Tunnel Service for %i
-Documentation=https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client
+Documentation=https://github.com/SGT-Cho/cloudflared-vnc-tunnel
 After=network-online.target
 Wants=network-online.target
 

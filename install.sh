@@ -15,7 +15,7 @@ INSTALL_DIR="/usr/local/bin"
 CONFIG_DIR="/etc/vnc-tunnel"
 SYSTEMD_DIR="/etc/systemd/system"
 SERVICE_USER="vnc-tunnel"
-REPO_URL="https://github.com/SGT-Cho/cloudflared-tunnel-vnc-docker-client"
+REPO_URL="https://github.com/SGT-Cho/cloudflared-vnc-tunnel"
 
 # Helper functions
 log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
