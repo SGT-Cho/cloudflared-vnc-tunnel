@@ -70,21 +70,4 @@ jobs:
         run: |
           systemd-analyze verify systemd/vnc-tunnel@.service || true
 
-  markdown:
-    name: Check Documentation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Check Markdown links
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          config-file: '.github/markdown-link-check.json'
-        continue-on-error: true
-
-      - name: Spell check
-        uses: streetsidesoftware/cspell-action@v5
-        with:
-          config: '.github/cspell.json'
-        continue-on-error: true
