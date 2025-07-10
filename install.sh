@@ -18,9 +18,9 @@ SERVICE_USER="vnc-tunnel"
 REPO_URL="https://github.com/SGT-Cho/cloudflared-vnc-tunnel"
 
 # Helper functions
-log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
-log_error() { echo -e "${RED}[ERROR]${NC} $1" >&2; }
-log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
+log_info() { printf "${GREEN}[INFO]${NC} %s\n" "$1"; }
+log_error() { printf "${RED}[ERROR]${NC} %s\n" "$1" >&2; }
+log_warn() { printf "${YELLOW}[WARN]${NC} %s\n" "$1"; }
 
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
@@ -78,7 +78,7 @@ log_info "Reloading systemd..."
 systemctl daemon-reload
 
 # Print usage instructions
-echo -e "\n${GREEN}Installation complete!${NC}\n"
+printf "\n${GREEN}Installation complete!${NC}\n\n"
 echo "To get started:"
 echo "  1. Edit profile: sudo nano $CONFIG_DIR/profiles/default"
 echo "  2. Start service: sudo systemctl start vnc-tunnel@default"
